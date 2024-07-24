@@ -1,6 +1,6 @@
 ﻿@page "/"
 @inject HttpClient Http
-<h3>HomePage</h3>
+
 <PageTitle>Blazing Trails</PageTitle>
 
 @if (_trails == null)
@@ -10,21 +10,18 @@
 else
 {
     <TrailDetails Trail="_selectedTrail" />
+
+    <TrailSearch />
+
     <div class="grid">
         @foreach (var trail in _trails)
         {
-            <TrailCard trail="trail" OnSelected="HandleTrailSelected"/>
+            <TrailCard Trail="trail" OnSelected="HandleTrailSelected" />
         }
-
     </div>
 }
 
-<Lifecycle/>
-
 @code {
-    /// <summary>
-    ///  Данные о тропах
-    /// </summary>
     private IEnumerable<Trail>? _trails;
     private Trail? _selectedTrail;
 
@@ -32,7 +29,6 @@ else
     {
         try
         {
-            // загрузка тестовые данные из файла .json
             _trails = await Http.GetFromJsonAsync<IEnumerable<Trail>>("trails/trail-data.json");
         }
         catch (HttpRequestException ex)
@@ -41,9 +37,6 @@ else
         }
     }
 
-    private void HandleTrailSelected(Trail trail)
-    {
-        _selectedTrail = trail;
-      //  StateHasChanged();
-    }
+    private void HandleTrailSelected(Trail trail) 
+        => _selectedTrail = trail;
 }

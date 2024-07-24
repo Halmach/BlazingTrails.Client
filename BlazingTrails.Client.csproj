@@ -31,9 +31,9 @@
 
 	<Target Name="CompileScopedScss" BeforeTargets="Compile">
 		<ItemGroup>
-			<ScopedScssFiles Include="Features/**/*.razor.scss" />
+		  <ScopedScssFiles Include="Features/**/*.razor.scss" />
 		</ItemGroup>
-
+    
 		<Exec Command="npm run sass -- %(ScopedScssFiles.Identity) %(relativedir)%(filename).css" />
 	</Target>
 
