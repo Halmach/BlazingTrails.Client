@@ -1,0 +1,65 @@
+﻿<@page "/add-trail"
+
+<PageTitle>Add Trail - Blazing Trails</PageTitle>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add Trail</li>
+    </ol>
+</nav>
+
+<h3 class="mt-5 mb-4">Add a trail</h3>
+
+<EditForm Model="_trail" OnValidSubmit="SubmitForm">
+    <FormSection Title="Basic Details" HelpText="This information is used to identify the trail and can be
+searched to help hikers find it.">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="trailName" class="font-weight-bold text-secondary">Name</label>
+                <InputText @bind-Value="_trail.Name" class="form-control" id="trailName"/>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="trailDescription" class="font-weight-bold text-secondary">Description</label>
+                <InputTextArea @bind-Value="_trail.Description" rows="6" class="form-control" id="trailDescription"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="trailLocation" class="font-weight-bold text-secondary">Location</label>
+                <InputText @bind-Value="_trail.Location" class="form-control" id="trailLocation"/>
+
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 mb-5">
+        <div class="row">
+            <div class="offset-4 col-8 text-right">
+                <button class="btn btn-outline-secondary" type="button" @onclick="@(() => _trail = new TrailDto())">Reset</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+    </FormSection>
+
+</EditForm>
+
+@code
+{
+    
+    private TrailDto _trail = new TrailDto();
+
+    // Метод SubmitForm вызывается всякий раз при вызове события OnValidSubmit компонента EditForm
+    private async Task SubmitForm()
+    {
+        // TODO: отправить данные в API;
+    }
+}
